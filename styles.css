@@ -1,149 +1,217 @@
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
 }
 
-:root {
-    --primary-text-color: #183b56;
-    --secondary-text-color: #577592;
-    --accent-color: #2294ed;
-    --accent-color-dark: #1d69a3;
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f4f4;
 }
 
-body {
-    font-family: "Poppins", sans-serif;
-    color: var(--primary-text-color);
+/* =========================
+   HEADER
+========================= */
+
+header{
+    box-shadow:0 2px 10px rgba(0,0,0,0.3);
 }
 
-p {
-    color: var(--secondary-text-color);
-    line-height: 1.4rem;
+header h2{
+    font-weight:bold;
+    color:#ffc107;
 }
 
-a {
-    text-decoration: none;
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar-nav .nav-link{
+    color:white !important;
+    font-size:18px;
+    margin-left:10px;
+    transition:0.3s;
 }
 
-ul {
-    list-style: none;
+.navbar-nav .nav-link:hover{
+    color:#ffc107 !important;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
+/* =========================
+   BREAKING NEWS
+========================= */
+
+.breaking-news{
+    background:#dc3545;
+    color:white;
+    font-size:20px;
+    padding:12px;
+    font-weight:bold;
 }
 
-.container {
-    max-width: 1180px;
-    margin-inline: auto;
-    overflow: hidden;
+/* =========================
+   SLIDER
+========================= */
+
+.slider-img{
+    height:500px;
+    object-fit:cover;
 }
 
-nav {
-    background-color: #f3faff;
-    box-shadow: 0 0 4px #bbd0e2;
-    position: fixed;
-    top: 0;
-    z-index: 99;
-    left: 0;
-    right: 0;
+/* =========================
+   SECTION TITLES
+========================= */
+
+section h2{
+    font-weight:bold;
+    color:#222;
+    margin-bottom:20px;
 }
 
-.main-nav {
-    justify-content: space-between;
-    padding-block: 8px;
+/* =========================
+   NEWS CARDS
+========================= */
+
+.news-card{
+    border:none;
+    overflow:hidden;
+    transition:0.4s;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-.company-logo img {
-    width: 120px;
+.news-card:hover{
+    transform:translateY(-10px);
 }
 
-.nav-links ul {
-    gap: 16px;
+.news-card img{
+    height:220px;
+    object-fit:cover;
 }
 
-.hover-link {
-    cursor: pointer;
+.news-card .card-title{
+    font-weight:bold;
 }
 
-.hover-link:hover {
-    color: var(--secondary-text-color);
+.news-card .btn{
+    width:100%;
 }
 
-.hover-link:active {
-    color: red;
+/* =========================
+   MEMBER FORM
+========================= */
+
+.member-form{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-.nav-item.active {
-    color: var(--accent-color);
+.member-form input,
+.member-form textarea{
+    border-radius:10px;
 }
 
-.search-bar {
-    height: 32px;
-    gap: 8px;
+/* =========================
+   CONTACT FORM
+========================= */
+
+#contact form{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
-.news-input {
-    width: 200px;
-    height: 100%;
-    padding-inline: 12px;
-    border-radius: 4px;
-    border: 2px solid #bbd0e2;
+#contact input,
+#contact textarea{
+    border-radius:10px;
 }
 
-.search-button {
-    background-color: var(--accent-color);
-    color: white;
-    padding: 8px 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-primary{
+    background:#0d6efd;
+    border:none;
 }
 
-.search-button:hover {
-    background-color: var(--accent-color-dark);
+.btn-primary:hover{
+    background:#084298;
 }
 
-main {
-    padding-block: 20px;
-    margin-top: 80px;
+.btn-warning{
+    font-weight:bold;
 }
 
-.cards-container {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    row-gap: 20px;
-    align-items: start;
+.btn-dark:hover{
+    background:#000;
 }
 
-.card {
-    width: 360px;
-    min-height: 400px;
-    box-shadow: 0 0 4px #d4ecff;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #fff;
-    overflow: hidden;
-    transition: all 0.3s ease;
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:50px;
 }
 
-.card:hover {
-    box-shadow: 1px 1px 8px #d4ecff;
-    background-color: #f9fdff;
-    transform: translate(-2px);
+footer h4{
+    color:#ffc107;
 }
 
-.card-header img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+footer p{
+    margin-bottom:5px;
 }
 
-.card-content {
-    padding: 12px;
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+    .slider-img{
+        height:350px;
+    }
+
+    header h2{
+        text-align:center;
+    }
 }
 
-.news-source {
-    margin-block: 12px;
+@media(max-width:768px){
+
+    .slider-img{
+        height:250px;
+    }
+
+    .breaking-news{
+        font-size:16px;
+    }
+
+    section h2{
+        font-size:28px;
+    }
+}
+
+@media(max-width:576px){
+
+    .slider-img{
+        height:200px;
+    }
+
+    .member-form,
+    #contact form{
+        padding:20px;
+    }
+
+    .breaking-news{
+        font-size:14px;
+    }
 }
