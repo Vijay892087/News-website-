@@ -1,293 +1,70 @@
-// ==========================
-// WEBSITE LOADED
-// ==========================
+const API_KEY = "1d3a0eefa97b499d8fbc4ee93eeb40b7";
+const url = "https://newsapi.org/v2/everything?q=";
 
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", () =&gt; fetchNews("India"));
 
-    console.log("The Global Express Loaded Successfully");
-
-    showWelcomeMessage();
-    createScrollButton();
-    updateDateTime();
-
-});
-
-// ==========================
-// MEMBER FORM
-// ==========================
-
-const memberForm = document.getElementById("memberForm");
-
-if (memberForm) {
-
-    memberForm.addEventListener("submit", function (e) {
-
-        e.preventDefault();
-
-        alert("🎉 Thank You For Becoming A Member!");
-
-        memberForm.reset();
-
-    });
-
+function reload() {
+    window.location.reload();
 }
 
-// ==========================
-// READ MORE BUTTONS
-// ==========================
-
-const readMoreButtons = document.querySelectorAll(".read-more");
-
-readMoreButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        alert("Full News Page Coming Soon!");
-
-    });
-
-});
-
-// ==========================
-// SCROLL TO TOP BUTTON
-// ==========================
-
-function createScrollButton() {
-
-    const btn = document.createElement("button");
-
-    btn.innerHTML = "↑";
-
-    btn.id = "scrollTopBtn";
-
-    document.body.appendChild(btn);
-
-    window.addEventListener("scroll", function () {
-
-        if (window.scrollY > 300) {
-
-            btn.style.display = "block";
-
-        } else {
-
-            btn.style.display = "none";
-
-        }
-
-    });
-
-    btn.addEventListener("click", function () {
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    });
-
+async function fetchNews(query) {
+    const res = await fetch(`${url}${query}&amp;apiKey=${API_KEY}`);
+    const data = await res.json();
+    bindData(data.articles);
+    console.log(data)
 }
 
-// ==========================
-// LIVE DATE & TIME
-// ==========================
+function bindData(articles) {
+    const cardsContainer = document.getElementById("cards-container");
+    const newsCardTemplate = document.getElementById("template-news-card");
 
-function updateDateTime() {
+    cardsContainer.innerHTML = "";
 
-    let dateContainer = document.getElementById("liveDate");
-
-    if (!dateContainer) {
-
-        dateContainer = document.createElement("div");
-
-        dateContainer.id = "liveDate";
-
-        dateContainer.style.background = "#111827";
-        dateContainer.style.color = "white";
-        dateContainer.style.padding = "10px";
-        dateContainer.style.textAlign = "center";
-        dateContainer.style.fontWeight = "bold";
-
-        document.body.prepend(dateContainer);
-
-    }
-
-    setInterval(() => {
-
-        const now = new Date();
-
-        dateContainer.innerHTML =
-            "📅 " + now.toLocaleDateString() +
-            " | ⏰ " + now.toLocaleTimeString();
-
-    }, 1000);
-
+    articles.forEach((article) =&gt; {
+        if (!article.urlToImage) return;
+        const cardClone = newsCardTemplate.content.cloneNode(true);
+        fillDataInCard(cardClone, article);
+        cardsContainer.appendChild(cardClone);
+    });
 }
 
-// ==========================
-// DARK MODE
-// ==========================
+function fillDataInCard(cardClone, article) {
+    const newsImg = cardClone.querySelector("#news-img");
+    const newsTitle = cardClone.querySelector("#news-title");
+    const newsSource = cardClone.querySelector("#news-source");
+    const newsDesc = cardClone.querySelector("#news-desc");
 
-const darkBtn = document.createElement("button");
+    newsImg.src = article.urlToImage;
+    newsTitle.innerHTML = article.title;
+    newsDesc.innerHTML = article.description;
 
-darkBtn.innerHTML = "🌙";
-
-darkBtn.style.position = "fixed";
-darkBtn.style.top = "100px";
-darkBtn.style.right = "20px";
-darkBtn.style.zIndex = "999";
-darkBtn.style.border = "none";
-darkBtn.style.padding = "10px 15px";
-darkBtn.style.borderRadius = "10px";
-darkBtn.style.cursor = "pointer";
-
-document.body.appendChild(darkBtn);
-
-let darkMode = false;
-
-darkBtn.addEventListener("click", function () {
-
-    darkMode = !darkMode;
-
-    if (darkMode) {
-
-        document.body.style.background = "#121212";
-        document.body.style.color = "#ffffff";
-
-        darkBtn.innerHTML = "☀️";
-
-    } else {
-
-        document.body.style.background = "#f5f7fa";
-        document.body.style.color = "#000000";
-
-        darkBtn.innerHTML = "🌙";
-
-    }
-
-});
-
-// ==========================
-// NEWS SEARCH BAR
-// ==========================
-
-function createSearchBar() {
-
-    const searchBox = document.createElement("input");
-
-    searchBox.placeholder = "Search News...";
-
-    searchBox.style.width = "300px";
-    searchBox.style.padding = "10px";
-    searchBox.style.margin = "20px";
-    searchBox.style.borderRadius = "10px";
-
-    document.body.insertBefore(
-        searchBox,
-        document.body.children[2]
-    );
-
-    searchBox.addEventListener("keyup", function () {
-
-        const value = searchBox.value.toLowerCase();
-
-        const cards = document.querySelectorAll(".news-card");
-
-        cards.forEach(function (card) {
-
-            const text = card.innerText.toLowerCase();
-
-            if (text.includes(value)) {
-
-                card.style.display = "block";
-
-            } else {
-
-                card.style.display = "none";
-
-            }
-
-        });
-
+    const date = new Date(article.publishedAt).toLocaleString("en-US", {
+        timeZone: "Asia/Jakarta",
     });
 
+    newsSource.innerHTML = `${article.source.name} · ${date}`;
+
+    cardClone.firstElementChild.addEventListener("click", () =&gt; {
+        window.open(article.url, "_blank");
+    });
 }
 
-createSearchBar();
-
-// ==========================
-// WELCOME MESSAGE
-// ==========================
-
-function showWelcomeMessage() {
-
-    setTimeout(() => {
-
-        alert("📰 Welcome To The Global Express News Portal");
-
-    }, 1000);
-
+let curSelectedNav = null;
+function onNavItemClick(id) {
+    fetchNews(id);
+    const navItem = document.getElementById(id);
+    curSelectedNav?.classList.remove("active");
+    curSelectedNav = navItem;
+    curSelectedNav.classList.add("active");
 }
 
-// ==========================
-// IMAGE HOVER EFFECT
-// ==========================
+const searchButton = document.getElementById("search-button");
+const searchText = document.getElementById("search-text");
 
-const images = document.querySelectorAll("img");
-
-images.forEach(function (img) {
-
-    img.addEventListener("mouseenter", function () {
-
-        img.style.transform = "scale(1.03)";
-        img.style.transition = "0.4s";
-
-    });
-
-    img.addEventListener("mouseleave", function () {
-
-        img.style.transform = "scale(1)";
-
-    });
-
-});
-
-// ==========================
-// CURRENT YEAR AUTO UPDATE
-// ==========================
-
-const copyright =
-    document.getElementById("copyright");
-
-if (copyright) {
-
-    copyright.innerHTML =
-        "© " +
-        new Date().getFullYear() +
-        " The Global Express. All Rights Reserved.";
-
-}
-
-// ==========================
-// SMOOTH NAVIGATION
-// ==========================
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener('click', function (e) {
-
-        e.preventDefault();
-
-        const target =
-            document.querySelector(this.getAttribute('href'));
-
-        if (target) {
-
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-
-        }
-
-    });
-
+searchButton.addEventListener("click", () =&gt; {
+    const query = searchText.value;
+    if (!query) return;
+    fetchNews(query);
+    curSelectedNav?.classList.remove("active");
+    curSelectedNav = null;
 });
