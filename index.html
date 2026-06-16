@@ -1,47 +1,191 @@
-<title>News App</title>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>The Global Express - News Portal</title>
 
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
 
-<nav>
-    <div class="main-nav container flex">
+    <!-- Header -->
 
-        <div class="nav-links">
-            <ul class="flex">
-                <li class="hover-link nav-item" id="finance">Finance</li>
-                <li class="hover-link nav-item" id="sports">Sports</li>
-                <li class="hover-link nav-item" id="crypto">Crypto</li>
-                <li class="hover-link nav-item" id="international">
-                    International</li>
-                <li class="hover-link nav-item" id="technical">Technical</li>
-                <li class="hover-link nav-item" id="AI">AI</li>
-                <li class="hover-link nav-item" id="education">Education</li>
+    <header>
+        <div class="container">
+            <h1 class="logo">📰 The Global Express</h1>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+
+    <nav>
+        <div class="main-nav container">
+
+            <ul class="nav-links">
+
+                <li class="nav-item" id="finance">Finance</li>
+                <li class="nav-item" id="sports">Sports</li>
+                <li class="nav-item" id="crypto">Crypto</li>
+                <li class="nav-item" id="international">International</li>
+                <li class="nav-item" id="technical">Technology</li>
+                <li class="nav-item" id="AI">AI</li>
+                <li class="nav-item" id="education">Education</li>
+
             </ul>
+
+            <div class="search-bar">
+
+                <input
+                    type="text"
+                    placeholder="Search News..."
+                    id="search-text">
+
+                <button id="search-button">
+                    Search
+                </button>
+
+            </div>
+
         </div>
-        <div class="search-bar flex">
+    </nav>
 
-            <button id="search-button" class="search-button">Search</button>
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h2>Latest News Around The World</h2>
+
+            <p>
+                Stay updated with Finance, Sports,
+                Crypto, AI, Technology and Education.
+            </p>
+
         </div>
-    </div>
-</nav>
 
+    </section>
 
-<main>
-    <div class="cards-container container flex" id="cards-container">
+    <!-- News Container -->
 
-    </div>
-</main>
+    <main>
 
+        <div class="cards-container container" id="cards-container">
 
-    <div class="card">
-        <div class="card-header">
-            <img decoding="async" src="https://via.placeholder.com/400x200" alt="news-image" id="news-img">
+            <!-- News Card 1 -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <img src="https://via.placeholder.com/400x200"
+                        alt="news-image">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Global Market Updates</h3>
+
+                    <h6 class="news-source">
+                        Finance News • Today
+                    </h6>
+
+                    <p>
+                        Stock markets continue to react to
+                        global economic developments.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- News Card 2 -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <img src="https://via.placeholder.com/400x200"
+                        alt="news-image">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>AI Revolution Expands</h3>
+
+                    <h6 class="news-source">
+                        AI News • Today
+                    </h6>
+
+                    <p>
+                        Artificial Intelligence continues
+                        transforming industries worldwide.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- News Card 3 -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <img src="https://via.placeholder.com/400x200"
+                        alt="news-image">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Latest Sports Headlines</h3>
+
+                    <h6 class="news-source">
+                        Sports News • Today
+                    </h6>
+
+                    <p>
+                        International sporting events draw
+                        attention from fans globally.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="card-content">
-            <h3 id="news-title">This is the Title</h3>
-            <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
-            <p class="news-desc" id="news-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-                saepe quis voluptatum quisquam vitae doloremque facilis molestias quae ratione cumque!</p>
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer>
+
+        <div class="container">
+
+            <h3>The Global Express</h3>
+
+            <p>
+                Latest News • Finance • Sports • Crypto • AI
+            </p>
+
+            <p>
+                © 2026 All Rights Reserved
+            </p>
+
         </div>
-    </div>
+
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
